@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #ffffff; 
+  background-color: #ffffff;
   color: #212529;
 }
 
@@ -15,15 +15,33 @@ button {
   font-family: inherit;
 }
 
-.navbar_back{
+.navbar_back {
   background-color: rgb(26, 91, 26);
 }
 
-#navbarNav ul li{
+#navbarNav ul li {
   font-size: 20px;
 }
 
-.navLink{
+.navLink {
   font-family: 'Montserrat', sans-serif;
   font-size: 28px;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.strongName{
+  color: green;
 }
