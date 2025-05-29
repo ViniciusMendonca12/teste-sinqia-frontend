@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 import TouristSpotApi from "../../services/touristSpotApi";
 import Loading from "../Loading";
+import ActionButtons from '../ActionButtons';
 
 const TouristSpotList = () => {
+  const navigate = useNavigate();
   const [spots, setSpots] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,6 +40,47 @@ const TouristSpotList = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Tem certeza?",
+      text: "Deseja realmente deletar este ponto turístico?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sim, deletar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33", 
+      cancelButtonColor: "#3085d6" 
+    });
+
+    if (!result.isConfirmed) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await TouristSpotApi.delete(id);
+
+      if (response.status) {
+        Swal.fire("Sucesso", response.message, "success");
+        setSelectedSpot(null)
+        await fetchSpots()
+      } else {
+        Swal.fire("Erro", response.message, "error");
+
+      }
+    } catch (error) {
+      Swal.fire("Erro", "Falha interna ao deletar o ponto turístico", "error");
+      console.error(error)
+    } finally {
+      setLoading(false);
+
+    }
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/editar/${id}`);
+  };
+
 
   useEffect(() => {
     fetchSpots();
@@ -65,7 +109,6 @@ const TouristSpotList = () => {
 
   return (
     <div className="container mt-4">
-      <h2>Pontos Turísticos</h2>
 
       <input
         type="text"
@@ -88,18 +131,12 @@ const TouristSpotList = () => {
               <p><strong>Descrição:</strong> {selectedSpot.description}</p>
               <p><strong>Localização:</strong> {selectedSpot.adress}, {selectedSpot.city} - {selectedSpot.state}</p>
 
-              <div className="d-flex gap-2 mt-3">
-                <button className="btn btn-sm btn-outline-primary d-flex align-items-center gap-1">
-                  <i className="fas fa-edit"></i>
-                  Editar
-                </button>
-                <button className="btn btn-sm btn-outline-danger d-flex align-items-center gap-1">
-                  <i className="fas fa-trash"></i>
-                  Deletar
-                </button>
-              </div>
+              <ActionButtons
+                onEdit={() => handleEdit(selectedSpot.id)}
+                onDelete={() => handleDelete(selectedSpot.id)}
+              />
 
-              <button className="btn btn-outline-secondary mt-3" onClick={() => setSelectedSpot(null)}>
+              <button className="btn btn-outline-secondary btnGreen mt-3" onClick={() => setSelectedSpot(null)}>
                 Voltar à lista
               </button>
             </div>

@@ -22,7 +22,7 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/create" className="nav-link">
+              <NavLink to="/cadastrar" className="nav-link">
                 Cadastrar Ponto Turístico
               </NavLink>
             </li>

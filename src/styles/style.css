@@ -45,3 +45,8 @@ button {
 .strongName{
   color: green;
 }
+
+.btnGreen{
+  background-color: #1a5b1a;
+  color:white;
+}

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_TOURIST_SPOT = axios.create({
-  baseURL: `https://localhost:7057/api/TouristSpot`,
+  baseURL: `${process.env.REACT_APP_API_URL}/TouristSpot`,
   timeout: 8000,
   headers: {
     "Content-Type": "application/json",

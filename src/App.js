@@ -11,7 +11,8 @@ export default function App() {
       <div className="container mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create" element={<Create />} />
+          <Route path="/editar/:id" element={<Create />} />
+          <Route path="/cadastrar" element={<Create />} />
         </Routes>
       </div>
     </Router>
