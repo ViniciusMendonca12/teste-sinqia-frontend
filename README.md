@@ -1,6 +1,6 @@
 # Projeto de Pontos Turísticos
 
-Este repositório contém o **Front-end** de um projeto de gerenciamento de Pontos Turísticos. Embora o repositório principal seja para o Front-end, incluí instruções completas para configurar e rodar tanto o Front-end quanto a API (Back-end) para facilitar o teste e desenvolvimento.
+Este repositório contém o **Front-end** do teste prático. Embora o repositório principal seja para o Front-end, incluí instruções completas para configurar e rodar tanto o Front-end quanto a API (Back-end) para facilitar o teste e desenvolvimento.
 
 ---
 
