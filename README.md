@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Projeto de Pontos Turísticos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este repositório contém o **Front-end** de um projeto de gerenciamento de Pontos Turísticos. Embora o repositório principal seja para o Front-end, incluí instruções completas para configurar e rodar tanto o Front-end quanto a API (Back-end) para facilitar o teste e desenvolvimento.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ⚙️ Tecnologias Utilizadas
 
-### `npm start`
+### API (.NET 8)
+O back-end é uma API RESTful desenvolvida em ASP.NET 8:
+* **ASP.NET 8**
+* **C#** (com Entity Framework Core para acesso a dados)
+* **SQL Server**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Front-end (React)
+A interface de usuário é uma aplicação web construída com ReactJS:
+* **ReactJS**
+* **JavaScript**
+* **HTML** e **CSS**
+* **Bootstrap** (para estilização)
+* **Axios** (para requisições HTTP)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🔧 Requisitos de Instalação
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para rodar este projeto, você precisará ter os seguintes softwares instalados em sua máquina:
 
-### `npm run build`
+* [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+* **SQL Server** (instalado e configurado)
+* [Node.js 18.8.0+](https://nodejs.org/) (já inclui o npm)
+* **Git**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Como Rodar o Projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Siga os passos abaixo para configurar e executar tanto a API quanto o Front-end.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Rodando a API (.NET 8)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A API é o back-end que gerencia os dados dos pontos turísticos.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1.  **Clone o repositório da API:**
+    Primeiro, clone o repositório da API em uma pasta de sua escolha:
+    ```bash
+    git clone https://github.com/ViniciusMendonca12/teste_sinqia_api.git
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2.  **Acesse a pasta do projeto da API:**
+    Navegue até o diretório do projeto da API:
+    ```bash
+    cd teste_sinqia_api
+    ```
 
-## Learn More
+3.  **Restaure os pacotes do projeto:**
+    Execute este comando para baixar todas as dependências do .NET:
+    ```bash
+    dotnet restore
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4.  **Configure a string de conexão no `appsettings.json`:**
+    Abra o arquivo `appsettings.json` na pasta da API e configure a string de conexão com seu SQL Server. Lembre-se de substituir `SEU_USUARIO` e `SUA_SENHA` pelas suas credenciais reais do banco de dados.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```json
+    {
+      "ConnectionStrings": {
+        "DataBase": "Server=localhost;Database=PontoTuristico;User Id=SEU_USUARIO;Password=SUA_SENHA;"
+      }
+    }
+    ```
 
-### Code Splitting
+5.  **(Opcional) Rode as migrations para criar as tabelas no banco de dados:**
+   Execute as migrations para criar o esquema das tabelas:
+    ```bash
+    dotnet ef database update
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+6.  **Execute o projeto (com HTTPS):**
+    Inicie a API. Verifique se ela esta rodando em `https://localhost:7057`. Essa é a porta que o React espera, se for diferente, altere o .env do projeto React.
+    ```bash
+    dotnet run
+    ```
+    Mantenha este terminal aberto enquanto estiver usando o Front-end.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2. Rodando o Front-end (React)
 
-### Making a Progressive Web App
+O Front-end é a interface de usuário que interage com a API.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1.  **Clone o repositório do Front-end:**
+    Clone este repositório (o Front-end) em uma pasta separada:
+    ```bash
+    git clone https://github.com/ViniciusMendonca12/teste-sinqia-frontend.git
+    ```
 
-### Advanced Configuration
+2.  **Acesse a pasta do projeto do Front-end:**
+    Navegue até o diretório do projeto do Front-end:
+    ```bash
+    cd teste-sinqia-frontend
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3.  **Instale as dependências do projeto:**
+    Instale todas as dependências do Node.js:
+    ```bash
+    npm install
+    ```
 
-### Deployment
+4.  **(Opcional) Configure a URL da API caso necessário:**
+    Verifique no arquivo `.env` uma constante no código chamada "REACT_APP_API_URL". Se a porta da sua API for diferente desse ENV, atualize esta URL para o endereço correto onde sua API está rodando.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+5.  **Inicie o servidor de desenvolvimento:**
+    Execute este comando para iniciar a aplicação React:
+    ```bash
+    npm run start
+    ```
+    A aplicação será aberta automaticamente em seu navegador, geralmente em `http://localhost:3000`.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📌 Observações Importantes
+
+* **API Primeiro:** Certifique-se de que a **API esteja rodando** antes de iniciar o Front-end, para que o Front-end possa consumir os dados corretamente.
+* **Endpoint da API:** Se você alterou a URL da API, não se esqueça de **atualizar o endpoint correspondente no código do Front-end** para garantir a comunicação entre as duas partes do sistema.
+* **Configuração do SQL Server:** Garanta que seu **SQL Server esteja rodando** e que as credenciais e a string de conexão no `appsettings.json` da API estejam corretas para evitar erros de conexão com o banco de dados.
+
+---
